@@ -15,8 +15,7 @@ resource "github_repository" {
   name            = "github-terraform-task-alonabelak"
   description     = "My repository description" 
   visibility      = "public" 
-
-  default_branch = "develop"
+  default_branch  = "develop"
 
   template {
     owner = "Practical-DevOps-GitHub"
