@@ -11,10 +11,11 @@ provider "github" {
   token  = var.github_token
 }
 
-resource "github_repository" {
+resource "github_repository" "github-terraform-task-alonabelak" {
   name            = "github-terraform-task-alonabelak"
   description     = "My repository description" 
   visibility      = "public" 
+
   default_branch  = "develop"
 
   template {
@@ -25,13 +26,13 @@ resource "github_repository" {
 }
 
 resource "github_repository_collaborator" "softservedata" {
-  repository = github-terraform-task-alonabelak
+  repository = "github-terraform-task-alonabelak"
   username   = "softservedata" 
   permission = "push" 
 }
 
 resource "github_branch_protection" "main" {
-  repository = github-terraform-task-alonabelak
+  repository = "github-terraform-task-alonabelak"
   branch     = "main"
 
   required_pull_request_reviews {
@@ -41,8 +42,8 @@ resource "github_branch_protection" "main" {
   }
 }
 
-resource "github_branch_protection" "develop_protection" {
-  repository = github-terraform-task-alonabelak
+resource "github_branch_protection" "develop" {
+  repository = "github-terraform-task-alonabelak"
   branch     = "develop"
 
   required_pull_request_reviews {
@@ -59,19 +60,18 @@ locals {
 }
 
 resource "github_repository_codeowners" "softservedata" {
-  repository = github_repository.example_repo.name
-  owner      = "Practical-DevOps-GitHub"  
+  repository = "github-terraform-task-alonabelak"
+  owner      = "softservedata"  
   path       = "/"
 }
 
-
 resource "github_actions_secret" "terraform_secret" {
-  repository = "terraform_repository"  
+  repository = "github-terraform-task-alonabelak"  
   name       = "TERRAFORM"
   value      = base64encode(file("main.tf"))
 }
 resource "github_repository_webhook" "discord_webhook" {
-  repository    = discord_webhook
+  repository    = "github-terraform-task-alonabelak"
   name          = "discord"
   active        = true
   events        = ["pull_request"]
@@ -81,7 +81,7 @@ resource "github_repository_webhook" "discord_webhook" {
   })
 }
 resource "github_actions_secret" "pat_secret" {
-  repository = github_repository.example_repo.name
+  repository = "github-terraform-task-alonabelak"
   secret_name = "PAT"
   plaintext_value = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQD92B17TcO3Uhmi4Aif9Gua0xmmZArnmO48sWR/bz7OwmUiBqy3xU2v2aAulVdSdaxNiVtEnyW3Rkzg8JLePp52KE65Zn7H/jzdzXPEOrweTCWy/2fmIMcYYzkjz8+MyhSuUkvK7QsM90DPutk5Kkq0VCAwbC/9USmxboidhCuAqO1pc1pQVupBbK+9gn+6gxIsWLJBgcdPV/0pgp4hkr9+Rf5CbxM959tuVBgW8Rv5w4gikDjIRajO27CcvzYVtUMj8gA64umcpPT7iNkGsvQdY/CrrPrqtlNF5RwGIr3nYIjDj850aOqoSHC1ujlTAgx5pkqdDNZxZnsJjAs6fdr4WDbyDJ5tNoxE/rUxUuQNkUim9OPDgxy8edteVL+bgcseudL5RLzYYuIi5T30zSkPXizi6ihNapkksAWXcMgv2e+6Rhwz5GaxS6oiPHiQBj3u6m+UyhIDHtOEaxLOAI49jWJd+E7x9OviJwtKNz+1CgmHPc2WPAhJ1UTCdHNA6G8=" 
 }
