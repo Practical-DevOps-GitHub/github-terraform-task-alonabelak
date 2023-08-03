@@ -28,6 +28,8 @@ resource "github_branch" "develop" {
   repository    = var.repository_name
   branch        = "develop"
   source_branch = "main"
+  auto_init = true
+
 }
 resource "github_branch_default" "this" {
   branch     = "develop"
