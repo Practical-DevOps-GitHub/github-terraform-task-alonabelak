@@ -12,7 +12,7 @@ provider "github" {
 }
 
 resource "github_repository" "github-terraform-task-alonabelak" {
-  name            = "github-terraform-task-alonabelak"
+  name            = "Github terraform repository"
   description     = "My repository description" 
   visibility      = "public" 
 
