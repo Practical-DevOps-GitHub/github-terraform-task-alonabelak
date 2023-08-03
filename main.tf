@@ -14,8 +14,8 @@ provider "github" {
   token  = var.github_token
 }
 
-resource "github_repository" "github-terraform-task-alonabelak" {
-  name            = "Github terraform repository"
+resource "github_repository" {
+  name            = "github-terraform-task-alonabelak"
   description     = "My repository description" 
   visibility      = "public" 
 
@@ -35,8 +35,12 @@ resource "github_repository_collaborator" "softservedata" {
 }
 
 resource "github_branch_protection" "main" {
-  repository = "github-terraform-task-alonabelak"
-  branch     = "main"
+  pattern =""
+  repository_id="main_branch_protection_id"
+locals {
+  main_branch_protection_id = github_branch_protection.main_protection.id
+  develop_branch_protection_id = github_branch_protection.develop_protection.id
+}
 
   required_pull_request_reviews {
     dismiss_stale_reviews = true
@@ -46,8 +50,8 @@ resource "github_branch_protection" "main" {
 }
 
 resource "github_branch_protection" "develop" {
-  repository = "github-terraform-task-alonabelak"
-  branch     = "develop"
+  pattern =""
+  repository_id="develop_branch_protection_id"
 
   required_pull_request_reviews {
     dismiss_stale_reviews = true
