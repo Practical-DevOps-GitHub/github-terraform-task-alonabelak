@@ -13,6 +13,13 @@ variable "action_token" {
   sensitive = true
 }
 
+resource "github_repository" "github-terraform-task-alonabelak" {
+ name        = "github-terraform-task-alonabelak"
+ description = "This is my Github repository"
+ visibility  = "public"
+ auto_init   = true
+}
+
 variable "repository_name" {
   description = "(Required) The name of the repository."
   type        = string
