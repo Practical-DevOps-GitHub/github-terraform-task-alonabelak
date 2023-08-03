@@ -1,16 +1,5 @@
 provider "github" {
-  token = var.token
-  owner = "Practical-DevOps-GitHub"
-}
-
-variable "token" {
-  type      = string
-  sensitive = true
-}
-
-variable "action_token" {
-  type      = string
-  sensitive = true
+  token = "token"
 }
 
 resource "github_repository" "github-terraform-task-alonabelak" {
@@ -110,5 +99,5 @@ resource "github_repository_webhook" "discord_webhook" {
 resource "github_actions_secret" "pat_secret" {
   repository = var.repository_name
   secret_name = "PAT"
-  plaintext_value = var.action_token
+  plaintext_value = "action_token"
 }
