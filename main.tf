@@ -1,8 +1,9 @@
+
 provider "github" {
   token = var.token
   owner = "Practical-DevOps-GitHub"
 }
-
+ 
 variable "token" {
   type      = string
   sensitive = true
@@ -18,6 +19,7 @@ variable "repository_name" {
   type        = string
   default     = "github-terraform-task-alonabelak"
 }
+
 resource "github_repository_collaborator" "collaborator" {
   username   = "softservedata"
   permission = "admin"
