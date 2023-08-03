@@ -6,7 +6,10 @@ terraform {
     }
   }
 }
-
+variable "github_token" {
+   type        = string
+   description = "GitHub Personal Access Token"
+}
 provider "github" {
   token  = var.github_token
 }
