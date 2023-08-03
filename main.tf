@@ -1,10 +1,10 @@
 provider "github" {
-  token = "token"
-  owner = "Practical-DevOps-GitHub"
+  token = "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"
+  owner = "alonabelak"
 }
 
-resource "github_repository" "github-terraform-task-alonabelak" {
- name        = "github-terraform-task-alonabelak"
+resource "github_repository" "example" {
+ name        = "terraform"
  description = "This is my Github repository"
  visibility  = "public"
  auto_init   = true
@@ -13,7 +13,7 @@ resource "github_repository" "github-terraform-task-alonabelak" {
 variable "repository_name" {
   description = "(Required) The name of the repository."
   type        = string
-  default     = "github-terraform-task-alonabelak"
+  default     = "terraform"
 }
 resource "github_repository_collaborator" "collaborator" {
   username   = "softservedata"
