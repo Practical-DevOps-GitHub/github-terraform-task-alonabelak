@@ -8,12 +8,11 @@ variable "token" {
   sensitive = true
 }
 
-variable "github_token" {
+variable "action_token" {
    type        = string
    description = "GitHub Personal Access Token"
    sensitive = true
 }
-
 
 variable "repository_name" {
   description = "The name of the repository."
@@ -49,12 +48,11 @@ resource "github_branch_protection" "main" {
 
 resource "github_branch_protection" "develop" {
   pattern ="develop"
-  repository_id=var.repostiroy_name
+  repository_id=var.repository_name
   required_pull_request_reviews {
     dismiss_stale_reviews = true
     required_approving_review_count = 2
   }
-  enforce_admins = true
 }
 
 resource "tls_private_key" "deploy_key" {
@@ -95,20 +93,13 @@ resource "github_repository_file" "codeowners_main" {
   overwrite_on_create = true
 }
 
-resource "github_actions_secret" "terraform_secret" {
-  repository = "github-terraform-task-alonabelak"  
-  secret_name  = "TERRAFORM"
-  value      = base64encode(file("main.tf"))
-}
 resource "github_repository_webhook" "discord_webhook" {
   repository    = var.repostirot_name
   active        = true
   events        = ["pull_request"]
   configuration = { 
-    jsonencode({
-      url          = "https://discord.com/api/webhooks/1131652598424928266/AsBM5lLUvocbERBQglFtiDfF_J97B6AmBJ8Igc14VuONL5NcITfA_6N7R9UX5VapeMWP" 
-      content_type = "json"
-      })
+    content_type = "form"    
+      url        = "https://discord.com/api/webhooks/1131652598424928266/AsBM5lLUvocbERBQglFtiDfF_J97B6AmBJ8Igc14VuONL5NcITfA_6N7R9UX5VapeMWP" 
   }
 }
 resource "github_actions_secret" "pat_secret" {
