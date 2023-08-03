@@ -92,12 +92,12 @@ resource "github_repository_file" "codeowners_main" {
 }
 
 resource "github_repository_webhook" "discord_webhook" {
-  repository    = var.repostirot_name
+  repository    = var.repository_name
   active        = true
   events        = ["pull_request"]
-  configuration = { 
-    content_type = "form"    
-      url        = "https://discord.com/api/webhooks/1131652598424928266/AsBM5lLUvocbERBQglFtiDfF_J97B6AmBJ8Igc14VuONL5NcITfA_6N7R9UX5VapeMWP" 
+  configuration {
+    content_type = "form"
+    url = "https://discord.com/api/webhooks/1131652598424928266/AsBM5lLUvocbERBQglFtiDfF_J97B6AmBJ8Igc14VuONL5NcITfA_6N7R9UX5VapeMWP"
   }
 }
 resource "github_actions_secret" "pat_secret" {
