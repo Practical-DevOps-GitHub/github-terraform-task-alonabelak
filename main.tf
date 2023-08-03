@@ -12,10 +12,9 @@ variable "action_token" {
   type      = string
   sensitive = true
 }
-variable "repository_name" {
-  description = "The name of the repository."
-  type        = string
-  default     = "github-terraform-task-alonabelak"
+resource "github_repository_collaborator" "softservedata" {
+  repository = "Practical-DevOps-GitHub/github-terraform-task-alonabelak"  
+  username   = "softservedata" 
 }
 
 resource "github_repository_collaborator" "softservedata" {
