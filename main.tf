@@ -1,5 +1,6 @@
 provider "github" {
   token = "token"
+  owner = "Practical-DevOps-GitHub"
 }
 
 resource "github_repository" "github-terraform-task-alonabelak" {
