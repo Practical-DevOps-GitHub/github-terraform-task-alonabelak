@@ -19,7 +19,6 @@ variable "repository_name" {
   default     = "github-terraform-task-alonabelak"
 }
 resource "github_repository_collaborator" "collaborator" {
-  owner = "Practical-DevOps-GitHub"
   username   = "softservedata"
   permission = "admin"
   repository = var.repository_name
