@@ -61,15 +61,9 @@ resource "github_branch_protection" "develop" {
   enforce_admins = true
 }
 
-resource "github_repository_codeowners" "softservedata" {
-  repository = "github-terraform-task-alonabelak"
-  owner      = "softservedata"  
-  path       = "/"
-}
-
 resource "github_actions_secret" "terraform_secret" {
   repository = "github-terraform-task-alonabelak"  
-  name       = "TERRAFORM"
+  secret_name  = "TERRAFORM"
   value      = base64encode(file("main.tf"))
 }
 resource "github_repository_webhook" "discord_webhook" {
@@ -77,10 +71,12 @@ resource "github_repository_webhook" "discord_webhook" {
   name          = "discord"
   active        = true
   events        = ["pull_request"]
-  configuration = jsonencode({
-    url          = "https://discord.com/api/webhooks/1131652598424928266/AsBM5lLUvocbERBQglFtiDfF_J97B6AmBJ8Igc14VuONL5NcITfA_6N7R9UX5VapeMWP" 
-    content_type = "json"
-  })
+  configuration = { 
+    jsonencode({
+      url          = "https://discord.com/api/webhooks/1131652598424928266/AsBM5lLUvocbERBQglFtiDfF_J97B6AmBJ8Igc14VuONL5NcITfA_6N7R9UX5VapeMWP" 
+      content_type = "json"
+      })
+  }
 }
 resource "github_actions_secret" "pat_secret" {
   repository = "github-terraform-task-alonabelak"
