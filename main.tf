@@ -12,15 +12,16 @@ variable "action_token" {
   type      = string
   sensitive = true
 }
-resource "github_repository_collaborator" "softservedata" {
-  repository = "Practical-DevOps-GitHub/github-terraform-task-alonabelak"  
-  username   = "softservedata" 
-}
 
-resource "github_repository_collaborator" "softservedata" {
+variable "repository_name" {
+  description = "(Required) The name of the repository."
+  type        = string
+  default     = "github-terraform-task-alonabelak"
+}
+resource "github_repository_collaborator" "collaborator" {
+  username   = "softservedata"
+  permission = "admin"
   repository = var.repository_name
-  username   = "softservedata" 
-  permission = "admin" 
 }
 
 resource "github_branch" "develop" {
