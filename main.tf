@@ -57,11 +57,6 @@ resource "github_branch_protection" "develop" {
   enforce_admins = true
 }
 
-locals {
-  main_branch_protection_id = github_branch_protection.main_protection.id
-  develop_branch_protection_id = github_branch_protection.develop_protection.id
-}
-
 resource "github_repository_codeowners" "softservedata" {
   repository = "github-terraform-task-alonabelak"
   owner      = "softservedata"  
