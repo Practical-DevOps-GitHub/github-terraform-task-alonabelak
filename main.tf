@@ -1,3 +1,8 @@
+variable "action_token" {
+   type        = string
+   description = "GitHub Personal Access Token"
+   sensitive = true
+}
 provider "github" {
   token  = var.github_token
   owner = "Practical-DevOps-GitHub"
@@ -6,12 +11,6 @@ provider "github" {
 variable "token" {
   type      = string
   sensitive = true
-}
-
-variable "action_token" {
-   type        = string
-   description = "GitHub Personal Access Token"
-   sensitive = true
 }
 
 variable "repository_name" {
