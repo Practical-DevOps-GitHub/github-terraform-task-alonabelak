@@ -15,6 +15,7 @@ provider "github" {
 }
 
 resource "github_repository" {
+  type = ""
   name            = "github-terraform-task-alonabelak"
   description     = "My repository description" 
   visibility      = "public" 
@@ -37,7 +38,8 @@ resource "github_repository_collaborator" "softservedata" {
 resource "github_branch_protection" "main" {
   pattern =""
   repository_id="main_branch_protection_id"
-locals {
+
+ids {
   main_branch_protection_id = github_branch_protection.main_protection.id
   develop_branch_protection_id = github_branch_protection.develop_protection.id
 }
